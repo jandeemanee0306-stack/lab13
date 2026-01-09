@@ -19,3 +19,34 @@ int main(){
     cout << "Min = " << B[5];
     return 0;
 }
+
+void stat(const double A[], int N, double B[]) {
+    double sum = 0.0;
+    double sumSq = 0.0;
+    double product = 1.0;
+    double reciprocalSum = 0.0;
+    double maxVal = A[0];
+    double minVal = A[0];
+
+    for (int i = 0; i < N; i++) {
+        sum += A[i];
+        sumSq += A[i] * A[i];
+        product *= A[i];
+        reciprocalSum += 1.0 / A[i];
+        if (A[i] > maxVal) maxVal = A[i];
+        if (A[i] < minVal) minVal = A[i];
+    }
+
+    double mean = sum / N;
+    double variance = (sumSq / N) - (mean * mean);
+    double stddev = sqrt(variance);
+    double geoMean = pow(product, 1.0 / N);
+    double harmMean = N / reciprocalSum;
+
+    B[0] = mean;        
+    B[1] = stddev;      
+    B[2] = geoMean;     
+    B[3] = harmMean;    
+    B[4] = maxVal;      
+    B[5] = minVal;      
+}
